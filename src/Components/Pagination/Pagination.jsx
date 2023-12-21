@@ -77,9 +77,7 @@ const Pagination = () => {
 
        
         <span className="text-lg font-bold mx-4 text-white">{currentPage}</span>
-
-       
-        <button
+<button
           className={`bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-lg ${
             currentPage === Math.ceil(data.length / itemsPerPage) && 'opacity-50 '
           }`}
