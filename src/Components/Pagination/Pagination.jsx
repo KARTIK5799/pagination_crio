@@ -38,10 +38,11 @@ const Pagination = () => {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto p-4">
-      <table className="w-full border-collapse border rounded my-4">
+    <div className="max-w-screen-xl mx-auto p-4 text-center">
+      <h1 className="text-2xl font-bold mb-4">Employee Data Table</h1>
+      <table className="w-full border-collapse border rounded-lg overflow-hidden bg-white">
         <thead>
-          <tr className="bg-blue-500 text-white">
+          <tr className="bg-gradient-to-r from-purple-500 to-blue-500 text-white">
             <th className="py-2 px-4">ID</th>
             <th className="py-2 px-4">Name</th>
             <th className="py-2 px-4">Email</th>
@@ -50,7 +51,10 @@ const Pagination = () => {
         </thead>
         <tbody>
           {currentItems.map((item) => (
-            <tr key={item.id} className="hover:bg-gray-100">
+            <tr
+              key={item.id}
+              className="hover:bg-gradient-to-r hover:from-purple-100 hover:to-blue-100 transition duration-300"
+            >
               <td className="py-2 px-4">{item.id}</td>
               <td className="py-2 px-4">{item.name}</td>
               <td className="py-2 px-4">{item.email}</td>
@@ -62,17 +66,17 @@ const Pagination = () => {
 
       <div className="flex justify-center items-center mt-4">
         <button
-          className={`bg-blue-500 text-white px-4 py-2 rounded ${
+          className={`bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-lg ${
             currentPage === 1 && 'opacity-50 cursor-not-allowed'
           }`}
           onClick={prevPage}
           disabled={currentPage === 1}
         >
-          &lt; Prev
+          &lt; Previous
         </button>
         <span className="text-lg font-bold mx-4">{currentPage}</span>
         <button
-          className={`bg-blue-500 text-white px-4 py-2 rounded ${
+          className={`bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-lg ${
             currentPage === Math.ceil(data.length / itemsPerPage) && 'opacity-50 cursor-not-allowed'
           }`}
           onClick={nextPage}
