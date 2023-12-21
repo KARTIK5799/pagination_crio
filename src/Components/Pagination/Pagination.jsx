@@ -38,8 +38,8 @@ const Pagination = () => {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto p-4 bg-gray-200">
-      <h1 className="text-2xl font-bold mb-4">Employee Data Table</h1>
+    <div className="max-w-screen-xl mx-auto p-4 text-center">
+      <h1 className="text-2xl font-bold mb-4 text-white">Employee Data Table</h1>
       <table className="w-full border-collapse border rounded-lg overflow-hidden bg-white">
         <thead>
           <tr className="bg-gradient-to-r from-purple-500 to-blue-500 text-white">
