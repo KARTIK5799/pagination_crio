@@ -16,7 +16,7 @@ const Pagination = () => {
         alert("failed to fetch data");
       }
     };
-
+  
     fetchData();
   }, []);
 
@@ -47,7 +47,7 @@ const Pagination = () => {
             <th className="border px-4 py-2">Name</th>
             <th className="border px-4 py-2">Email</th>
             <th className="border px-4 py-2">Role</th>
-            {/* Add more table headers based on your data */}
+          
           </tr>
         </thead>
         <tbody>
@@ -57,7 +57,7 @@ const Pagination = () => {
               <td className="border px-4 py-2">{item.name}</td>
               <td className="border px-4 py-2">{item.email}</td>
               <td className="border px-4 py-2">{item.role}</td>
-              {/* Render additional table data based on your data */}
+            
             </tr>
           ))}
         </tbody>
