@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import 'tailwindcss/tailwind.css';
+import axios from 'axios';
 
 const Pagination = () => {
   const [data, setData] = useState([]);
@@ -7,118 +7,84 @@ const Pagination = () => {
   const itemsPerPage = 10;
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json");
-        const fetchedData = await response.json();
-        setData(fetchedData);
-      } catch (error) {
-        alert("failed to fetch data");
-      }
-    };
-  
     fetchData();
   }, []);
 
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage((prevPage) => prevPage + 1);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        'https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json'
+      );
+      setData(response.data);
+    } catch (error) {
+      alert('Failed to fetch data');
     }
   };
 
-  const handlePreviousPage = () => {
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+  const nextPage = () => {
+    if (currentPage < Math.ceil(data.length / itemsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
     if (currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1);
+      setCurrentPage(currentPage - 1);
     }
   };
-
-  const totalPages = Math.ceil(data.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentData = data.slice(startIndex, endIndex);
 
   return (
-    <div className="container mx-auto mt-8">
-      <h1>Employee Data Table</h1>
-      <table className="table-auto border w-full">
+    <div className="max-w-screen-xl mx-auto p-4 bg-gray-200">
+      <h1 className="text-2xl font-bold mb-4">Employee Data Table</h1>
+      <table className="w-full border-collapse border rounded-lg overflow-hidden bg-white">
         <thead>
-          <tr>
-            <th className="border px-4 py-2">ID</th>
-            <th className="border px-4 py-2">Name</th>
-            <th className="border px-4 py-2">Email</th>
-            <th className="border px-4 py-2">Role</th>
-          
+          <tr className="bg-gradient-to-r from-purple-500 to-blue-500 text-white">
+            <th className="py-2 px-4">ID</th>
+            <th className="py-2 px-4">Name</th>
+            <th className="py-2 px-4">Email</th>
+            <th className="py-2 px-4">Role</th>
           </tr>
         </thead>
         <tbody>
-          {currentData.map((item) => (
-            <tr key={item.id}>
-              <td className="border px-4 py-2">{item.id}</td>
-              <td className="border px-4 py-2">{item.name}</td>
-              <td className="border px-4 py-2">{item.email}</td>
-              <td className="border px-4 py-2">{item.role}</td>
-            
+          {currentItems.map((item) => (
+            <tr
+              key={item.id}
+              className="hover:bg-gradient-to-r hover:from-purple-100 hover:to-blue-100 transition duration-300"
+            >
+              <td className="py-2 px-4">{item.id}</td>
+              <td className="py-2 px-4">{item.name}</td>
+              <td className="py-2 px-4">{item.email}</td>
+              <td className="py-2 px-4">{item.role}</td>
             </tr>
           ))}
         </tbody>
       </table>
 
-
-      <div className="flex justify-between mt-4">
-  <button
-    onClick={handlePreviousPage}
-    className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
-   
-  >
-    Previous
-  </button>
-  <span className="text-gray-700">{`Page ${currentPage} of ${totalPages}`}</span>
-  <button
-    onClick={handleNextPage}
-    className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
-   
-  >
-    Next
-  </button>
-</div>
-
-
-      {/* <div className="flex justify-between mt-4">
-  {currentPage > 1 ? (
-    <button
-      onClick={handlePreviousPage}
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-    >
-      Previous
-    </button>
-  ) : (
-    <button
-      onClick={handlePreviousPage}
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed"
-      disabled
-    >
-      Previous
-    </button>
-  )}
-  <span className="text-gray-700">{`Page ${currentPage} of ${totalPages}`}</span>
-  {currentPage < totalPages ? (
-    <button
-      onClick={handleNextPage}
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-    >
-      Next
-    </button>
-  ) : (
-    <button
-      onClick={handleNextPage}
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed"
-      disabled
-    >
-      Next
-    </button>
-  )}
-</div> */}
-
+      <div className="flex justify-center items-center mt-4">
+        <button
+          className={`bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-lg ${
+            currentPage === 1 && 'opacity-50 cursor-not-allowed'
+          }`}
+          onClick={prevPage}
+         
+        >
+          &lt; Previous
+        </button>
+        <span className="text-lg font-bold mx-4">{currentPage}</span>
+        <button
+          className={`bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-lg ${
+            currentPage === Math.ceil(data.length / itemsPerPage) && 'opacity-50 cursor-not-allowed'
+          }`}
+          onClick={nextPage}
+         
+        >
+          Next &gt;
+        </button>
+      </div>
     </div>
   );
 };
