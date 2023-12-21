@@ -17,7 +17,7 @@ const Pagination = () => {
       );
       setData(response.data);
     } catch (error) {
-      alert('Failed to fetch data');
+      alert('failed to fetch data');
     }
   };
 
@@ -38,7 +38,7 @@ const Pagination = () => {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto p-4 text-center">
+    <div className="max-w-screen-xl mx-auto p-4 bg-gray-200 text-center">
       <h1 className="text-2xl font-bold mb-4">Employee Data Table</h1>
       <table className="w-full border-collapse border rounded-lg overflow-hidden bg-white">
         <thead>
