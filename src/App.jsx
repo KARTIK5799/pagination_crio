@@ -5,7 +5,7 @@ function App() {
  
 
   return (
-    <div className='bg-gray-800 h-screen'>
+    <div className=' h-screen'>
       <Pagination/>
     </div>
   )
