@@ -38,11 +38,11 @@ const Pagination = () => {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto p-4 bg-gray-200 text-center">
+    <div className="max-w-screen-xl mx-auto p-4 text-center">
       <h1 className="text-2xl font-bold mb-4">Employee Data Table</h1>
-      <table className="w-full border-collapse border rounded-lg overflow-hidden bg-white">
+      <table className="w-full border rounded-sm overflow-hidden bg-white">
         <thead>
-          <tr className="bg-gradient-to-r from-purple-500 to-blue-500 text-white">
+          <tr className="bg-green-700 text-white">
             <th className="py-2 px-4">ID</th>
             <th className="py-2 px-4">Name</th>
             <th className="py-2 px-4">Email</th>
@@ -66,17 +66,21 @@ const Pagination = () => {
 
       <div className="flex justify-center items-center mt-4">
         <button
-          className={`bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-lg `}
+          className={`bg-green-700 text-white px-6 py-2 rounded-sm ${
+            currentPage === 1 && 'opacity-50 cursor-not-allowed'
+          }`}
           onClick={prevPage}
-        
+          disabled={currentPage === 1}
         >
           &lt; Previous
         </button>
-        <span className="text-lg font-bold mx-4">{currentPage}</span>
+        <span className="text-lg font-bold mx-4 bg-green-700 text-white px-6 py-2 rounded-sm">{currentPage}</span>
         <button
-          className={`bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-lg `}
+          className={`bg-green-700  text-white px-6 py-2 rounded-sm ${
+            currentPage === Math.ceil(data.length / itemsPerPage) && 'opacity-50 cursor-not-allowed'
+          }`}
           onClick={nextPage}
-          
+          disabled={currentPage === Math.ceil(data.length / itemsPerPage)}
         >
           Next &gt;
         </button>
