@@ -64,24 +64,41 @@ const Pagination = () => {
       </table>
 
       <div className="flex justify-between mt-4">
-        <button
-          onClick={handlePreviousPage}
-          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
-            currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
-        >
-          Previous
-        </button>
-        <span className="text-gray-700">{`Page ${currentPage} of ${totalPages}`}</span>
-        <button
-          onClick={handleNextPage}
-          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
-            currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
-        >
-          Next
-        </button>
-      </div>
+  {currentPage > 1 ? (
+    <button
+      onClick={handlePreviousPage}
+      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    >
+      Previous
+    </button>
+  ) : (
+    <button
+      onClick={handlePreviousPage}
+      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed"
+      disabled
+    >
+      Previous
+    </button>
+  )}
+  <span className="text-gray-700">{`Page ${currentPage} of ${totalPages}`}</span>
+  {currentPage < totalPages ? (
+    <button
+      onClick={handleNextPage}
+      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    >
+      Next
+    </button>
+  ) : (
+    <button
+      onClick={handleNextPage}
+      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed"
+      disabled
+    >
+      Next
+    </button>
+  )}
+</div>
+
     </div>
   );
 };
