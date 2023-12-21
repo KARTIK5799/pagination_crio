@@ -13,7 +13,7 @@ const Pagination = () => {
         const fetchedData = await response.json();
         setData(fetchedData);
       } catch (error) {
-        alert("Failed to fetch data");
+        alert("failed to fetch data");
       }
     };
 
