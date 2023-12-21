@@ -63,7 +63,27 @@ const Pagination = () => {
         </tbody>
       </table>
 
+
       <div className="flex justify-between mt-4">
+  <button
+    onClick={handlePreviousPage}
+    className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
+   
+  >
+    Previous
+  </button>
+  <span className="text-gray-700">{`Page ${currentPage} of ${totalPages}`}</span>
+  <button
+    onClick={handleNextPage}
+    className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
+   
+  >
+    Next
+  </button>
+</div>
+
+
+      {/* <div className="flex justify-between mt-4">
   {currentPage > 1 ? (
     <button
       onClick={handlePreviousPage}
@@ -97,7 +117,7 @@ const Pagination = () => {
       Next
     </button>
   )}
-</div>
+</div> */}
 
     </div>
   );
