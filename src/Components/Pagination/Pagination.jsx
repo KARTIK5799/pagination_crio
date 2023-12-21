@@ -65,25 +65,28 @@ const Pagination = () => {
       </table>
 
       <div className="flex justify-center items-center mt-4">
-        
+        {currentPage > 1 ? (
+          <button
+            className={`bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-lg`}
+            onClick={prevPage}
+          >
+            &lt; Previous
+          </button>
+        ) : (
+          <button
+            className={`bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-lg opacity-50 cursor-not-allowed`}
+            disabled
+          >
+            &lt; Previous
+          </button>
+        )}
+        <span className="text-lg font-bold mx-4">{currentPage}</span>
         <button
           className={`bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-lg ${
-            currentPage === 1 && 'opacity-50 cursor-not-allowed'
-          }`}
-          onClick={prevPage}
-        >
-          &lt; Previous
-        </button>
-
-       
-        <span className="text-lg font-bold mx-4 text-white">{currentPage}</span>
-
-       
-        <button
-          className={`bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-lg ${
-            currentPage === Math.ceil(data.length / itemsPerPage) && 'opacity-50 '
+            currentPage === Math.ceil(data.length / itemsPerPage) && 'opacity-50 cursor-not-allowed'
           }`}
           onClick={nextPage}
+          disabled={currentPage === Math.ceil(data.length / itemsPerPage)}
         >
           Next &gt;
         </button>
