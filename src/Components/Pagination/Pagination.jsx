@@ -72,8 +72,7 @@ const Pagination = () => {
           }`}
           onClick={prevPage}
           disabled={currentPage === 1}
-        >
-          &lt; Previous
+        >Previous
         </button>
         <span className="text-lg font-bold mx-4 bg-green-700 text-white px-6 py-2 rounded-sm">{currentPage}</span>
         <button
@@ -81,9 +80,8 @@ const Pagination = () => {
             currentPage === Math.ceil(data.length / itemsPerPage) && 'opacity-50 cursor-not-allowed'
           }`}
           onClick={nextPage}
-          disabled={currentPage === Math.ceil(data.length / itemsPerPage)}
-        >
-          Next &gt;
+          disabled={currentPage === totalPages}
+        >Next;
         </button>
       </div>
 
