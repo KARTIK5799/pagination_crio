@@ -40,7 +40,7 @@ const Pagination = () => {
 
   return (
     <div className="max-w-screen-xl mx-auto p-4 text-center">
-      <h1 className="text-4xl text-black font-bold mb-4">Employee Data Table</h1>
+      <h1 className="text-4xl font-bold mb-4">Employee Data Table</h1>
       <table className="w-full border">
         <thead>
           <tr className="bg-green-700 text-white">
@@ -65,7 +65,7 @@ const Pagination = () => {
         </tbody>
       </table>
 
-      {/* <div className="flex justify-center items-center mt-4">
+      <div className="flex justify-center items-center mt-4">
         <button
           className={`bg-green-700 text-white px-6 py-2 rounded-sm ${
             currentPage === 1 && 'opacity-50 cursor-not-allowed'
@@ -85,10 +85,10 @@ const Pagination = () => {
         >
           Next &gt;
         </button>
-      </div> */}
+      </div>
 
 
-<div className="flex justify-center items-center mt-4">
+{/* <div className="flex justify-center items-center mt-4">
   {currentPage > 1 ? (
     <button
       onClick={prevPage}
@@ -122,7 +122,7 @@ const Pagination = () => {
       Next
     </button>
   )}
-</div>
+</div> */}
 
 
 
