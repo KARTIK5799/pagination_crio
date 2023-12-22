@@ -18,7 +18,7 @@ const Pagination = () => {
       );
       setData(response.data);
     } catch (error) {
-      alert('failed to fetch data');
+      alert('failed data fetch');
     }
   };
 
