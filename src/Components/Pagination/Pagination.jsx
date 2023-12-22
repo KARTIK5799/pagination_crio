@@ -24,6 +24,7 @@ const Pagination = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages=Math.ceil(data.length / itemsPerPage);
 
   const nextPage = () => {
     if (currentPage < Math.ceil(data.length / itemsPerPage)) {
@@ -39,8 +40,8 @@ const Pagination = () => {
 
   return (
     <div className="max-w-screen-xl mx-auto p-4 text-center">
-      <h1 className="text-2xl font-bold mb-4">Employee Data Table</h1>
-      <table className="w-full border rounded-sm overflow-hidden bg-white">
+      <h1 className="text-4xl text-black font-bold mb-4">Employee Data Table</h1>
+      <table className="w-full border">
         <thead>
           <tr className="bg-green-700 text-white">
             <th className="py-2 px-4">ID</th>
@@ -53,7 +54,7 @@ const Pagination = () => {
           {currentItems.map((item) => (
             <tr
               key={item.id}
-              className="hover:bg-gradient-to-r hover:from-purple-100 hover:to-blue-100 transition duration-300"
+              className='border'
             >
               <td className="py-2 px-4">{item.id}</td>
               <td className="py-2 px-4">{item.name}</td>
@@ -64,7 +65,7 @@ const Pagination = () => {
         </tbody>
       </table>
 
-      <div className="flex justify-center items-center mt-4">
+      {/* <div className="flex justify-center items-center mt-4">
         <button
           className={`bg-green-700 text-white px-6 py-2 rounded-sm ${
             currentPage === 1 && 'opacity-50 cursor-not-allowed'
@@ -84,7 +85,47 @@ const Pagination = () => {
         >
           Next &gt;
         </button>
-      </div>
+      </div> */}
+
+
+<div className="flex justify-center items-center mt-4">
+  {currentPage > 1 ? (
+    <button
+      onClick={prevPage}
+      className="text-lg font-bold mx-4 bg-green-700 text-white px-6 py-2 rounded-sm"
+    >
+      Previous
+    </button>
+  ) : (
+    <button
+      onClick={prevPage}
+      className="text-lg font-bold mx-4 bg-green-700 text-white px-6 py-2 rounded-sm cursor-not-allowed opacity-70"
+      disabled
+    >
+      Previous
+    </button>
+  )}
+  <span className="text-lg font-bold mx-4 bg-green-700 text-white px-6 py-2 rounded-sm">{currentPage}</span>
+  {currentPage < totalPages ? (
+    <button
+      onClick={nextPage}
+      className="text-lg font-bold mx-4 bg-green-700 text-white px-6 py-2 rounded-sm"
+    >
+      Next
+    </button>
+  ) : (
+    <button
+      onClick={nextPage}
+      className="text-lg font-bold mx-4 bg-green-700 text-white px-6 py-2 rounded-sm cursor-not-allowed opacity-70"
+      disabled
+    >
+      Next
+    </button>
+  )}
+</div>
+
+
+
     </div>
   );
 };
