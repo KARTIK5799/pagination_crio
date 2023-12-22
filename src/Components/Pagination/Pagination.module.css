@@ -21,6 +21,7 @@
   .tableHeader {
     background-color: #29a95e;
     color: #fff;
+    padding: 2rem;
   }
   
   .tableRow {
