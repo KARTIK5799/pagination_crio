@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styles from './Pagination.module.css';
 
 const Pagination = () => {
   const [data, setData] = useState([]);
@@ -24,7 +25,7 @@ const Pagination = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages=Math.ceil(data.length / itemsPerPage);
+  const totalPages = Math.ceil(data.length / itemsPerPage);
 
   const nextPage = () => {
     if (currentPage < Math.ceil(data.length / itemsPerPage)) {
@@ -39,90 +40,48 @@ const Pagination = () => {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto p-4 text-center">
-      <h1 className="text-4xl font-bold mb-4">Employee Data Table</h1>
-      <table className="w-full border">
+    <div className={styles.tableContainer}>
+      <h1 className={styles.tableTitle}>Employee Data Table</h1>
+      <table className={styles.dataTable}>
         <thead>
-          <tr className="bg-green-700 text-white">
-            <th className="py-2 px-4">ID</th>
-            <th className="py-2 px-4">Name</th>
-            <th className="py-2 px-4">Email</th>
-            <th className="py-2 px-4">Role</th>
+          <tr className={styles.tableHeader}>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
           </tr>
         </thead>
         <tbody>
           {currentItems.map((item) => (
-            <tr
-              key={item.id}
-              className='border'
-            >
-              <td className="py-2 px-4">{item.id}</td>
-              <td className="py-2 px-4">{item.name}</td>
-              <td className="py-2 px-4">{item.email}</td>
-              <td className="py-2 px-4">{item.role}</td>
+            <tr key={item.id} className={styles.tableRow}>
+              <td>{item.id}</td>
+              <td>{item.name}</td>
+              <td>{item.email}</td>
+              <td>{item.role}</td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      {/* <div className="flex justify-center items-center mt-4">
-        <button
-          className={`bg-green-700 text-white px-6 py-2 rounded-sm ${
-            currentPage === 1 && 'opacity-50 cursor-not-allowed'
-          }`}
-          onClick={prevPage}
-          disabled={currentPage === 1}
-        >Previous
-        </button>
-        <span className="text-lg font-bold mx-4 bg-green-700 text-white px-6 py-2 rounded-sm">{currentPage}</span>
-        <button
-          className={`bg-green-700  text-white px-6 py-2 rounded-sm ${
-            currentPage === Math.ceil(data.length / itemsPerPage) && 'opacity-50 cursor-not-allowed'
-          }`}
-          onClick={nextPage}
-          disabled={currentPage === totalPages}
-        >Next;
-        </button>
-      </div> */}
-
-
-<div className="flex justify-center items-center mt-4">
-  {currentPage > 1 ? (
+      <div className={styles.paginationContainer}>
+  <div className={styles.paginationButtons}>
     <button
       onClick={prevPage}
-      className="text-lg font-bold mx-4 bg-green-700 text-white px-6 py-2 rounded-sm"
+      className={styles.paginationButton}
+      style={{ opacity: currentPage > 1 ? 1 : 0.5 }}
     >
       Previous
     </button>
-  ) : (
-    <button
-      onClick={prevPage}
-      className="text-lg font-bold mx-4 bg-green-700 text-white px-6 py-2 rounded-sm cursor-not-allowed opacity-70"
-      disabled
-    >
-      Previous
-    </button>
-  )}
-  <span className="text-lg font-bold mx-4 bg-green-700 text-white px-6 py-2 rounded-sm">{currentPage}</span>
-  {currentPage < totalPages ? (
+    <span className={styles.paginationCurrent}>{currentPage}</span>
     <button
       onClick={nextPage}
-      className="text-lg font-bold mx-4 bg-green-700 text-white px-6 py-2 rounded-sm"
+      className={styles.paginationButton}
+      style={{ opacity: currentPage < totalPages ? 1 : 0.5 }}
     >
       Next
     </button>
-  ) : (
-    <button
-      onClick={nextPage}
-      className="text-lg font-bold mx-4 bg-green-700 text-white px-6 py-2 rounded-sm cursor-not-allowed opacity-70"
-      disabled
-    >
-      Next
-    </button>
-  )}
+  </div>
 </div>
-
-
 
     </div>
   );
